@@ -17,10 +17,9 @@ import java.sql.Statement;
 
 public class Main extends AppCompatActivity {
 
-    EstablishCon estCon = new EstablishCon();
-    Connection connection;
-    EditText uid,pwd;
-    String user_id,pass,qry;
+    EditText uid, pwd;
+    String user_id, pass, qry;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,24 +32,8 @@ public class Main extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-
-                    user_id = uid.getText().toString();
-                    pass = pwd.getText().toString();
-
-                    qry = "SELECT * FROM municipal_server WHERE userid = " + user_id + " and password = " + pass;
-
-                    connection=estCon.doInBackground();
-                    Statement stmt = connection.createStatement();
-                    ResultSet rSet = stmt.executeQuery(qry);
-                    if(rSet.next())
-                        Toast.makeText(getApplicationContext(),"Hello "+user_id,Toast.LENGTH_SHORT).show();
-
-//                    con.execute();
-//                    if (con != null) {
-//                        button.setText("Connected");
-//                    }
-                }catch (SQLException se) {
-                    Log.e("ERRO", se.getMessage());
+                    EstablishCon establishCon = new EstablishCon();
+                    establishCon.execute();
                 } catch (Exception e) {
                     Log.e("ERRO", e.getMessage());
                 }
@@ -58,23 +41,40 @@ public class Main extends AppCompatActivity {
         });
     }
 
-    class EstablishCon extends AsyncTask<String, String, Connection> {
+    class EstablishCon extends AsyncTask<String, String, String> {
 
+        Boolean ifLogin=false;
         @Override
-        protected Connection doInBackground(String... strings) {
-            Connection con=null;
+        protected String doInBackground(String... strings) {
+            Connection con = null;
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server","root", "123456");
+                con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
+                user_id = uid.getText().toString();
+                pass = pwd.getText().toString();
+                qry = "SELECT * FROM user WHERE userid = '" + user_id + "' and password = '" + pass+"'";
+                Statement stmt = con.createStatement();
+                ResultSet rSet = stmt.executeQuery(qry);
+                if (rSet.next())
+                    ifLogin=true;
 
             } catch (SQLException se) {
                 Log.e("ERRO", se.getMessage());
-            } catch (ClassNotFoundException e) {
-                Log.e("ERRO", e.getMessage());
-            } catch (Exception e) {
+            }catch (ClassNotFoundException e) {
                 Log.e("ERRO", e.getMessage());
             }
-            return con;
+            catch (Exception e) {
+                Log.e("ERRO", e.getMessage());
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+           if (ifLogin)
+               Toast.makeText(getApplicationContext(), "Hello " + user_id, Toast.LENGTH_SHORT).show();
+           else
+               Toast.makeText(getApplicationContext(), "Hello notttt" + user_id, Toast.LENGTH_SHORT).show();
         }
     }
 }
