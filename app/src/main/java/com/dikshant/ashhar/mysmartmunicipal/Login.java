@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -19,7 +20,7 @@ import java.sql.Statement;
 public class Login extends AppCompatActivity {
 
     EditText uid, pwd;
-    String user_id, pass, qry;
+    public String user_id, pass, qry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,9 +51,9 @@ public class Login extends AppCompatActivity {
             Connection con = null;
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
-                user_id = uid.getText().toString();
-                pass = pwd.getText().toString();
+                con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "aezakmi1");
+                user_id=uid.getText().toString();
+                pass=pwd.getText().toString();
                 qry = "SELECT * FROM user WHERE userid = '" + user_id + "' and password = '" + pass+"'";
                 Statement stmt = con.createStatement();
                 ResultSet rSet = stmt.executeQuery(qry);
@@ -74,6 +75,7 @@ public class Login extends AppCompatActivity {
         protected void onPostExecute(String s) {
            if (ifLogin) {
                Intent intentMain = new Intent(Login.this,HomePage.class);
+               intentMain.putExtra("user_id",user_id);
                startActivity(intentMain);
                Toast.makeText(getApplicationContext(), "Hello " + user_id, Toast.LENGTH_SHORT).show();
            }else
