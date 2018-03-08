@@ -1,5 +1,6 @@
 package com.dikshant.ashhar.mysmartmunicipal;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -71,9 +72,11 @@ public class Main extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-           if (ifLogin)
+           if (ifLogin) {
+               Intent intentMain = new Intent(Main.this,HomePage.class);
+               startActivity(intentMain);
                Toast.makeText(getApplicationContext(), "Hello " + user_id, Toast.LENGTH_SHORT).show();
-           else
+           }else
                Toast.makeText(getApplicationContext(), "Wrong Credentials" + user_id, Toast.LENGTH_SHORT).show();
         }
     }
