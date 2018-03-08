@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Main extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     EditText uid, pwd;
     String user_id, pass, qry;
@@ -73,7 +73,7 @@ public class Main extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
            if (ifLogin) {
-               Intent intentMain = new Intent(Main.this,HomePage.class);
+               Intent intentMain = new Intent(Login.this,HomePage.class);
                startActivity(intentMain);
                Toast.makeText(getApplicationContext(), "Hello " + user_id, Toast.LENGTH_SHORT).show();
            }else
