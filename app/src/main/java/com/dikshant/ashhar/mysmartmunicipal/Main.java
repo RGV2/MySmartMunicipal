@@ -74,7 +74,7 @@ public class Main extends AppCompatActivity {
            if (ifLogin)
                Toast.makeText(getApplicationContext(), "Hello " + user_id, Toast.LENGTH_SHORT).show();
            else
-               Toast.makeText(getApplicationContext(), "Hello notttt" + user_id, Toast.LENGTH_SHORT).show();
+               Toast.makeText(getApplicationContext(), "Wrong Credentials" + user_id, Toast.LENGTH_SHORT).show();
         }
     }
 }
