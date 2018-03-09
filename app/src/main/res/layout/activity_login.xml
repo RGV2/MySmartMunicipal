@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="100dp"
         android:ems="10"
-        android:hint="user id "
+        android:hint="@string/user_id"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,12 +36,12 @@
         app:layout_constraintTop_toBottomOf="@+id/uid" />
 
     <Button
-        android:id="@+id/login_but"
+        android:id="@+id/login_BTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="162dp"
         android:layout_marginTop="100dp"
-        android:text="LOGIN"
+        android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.287"
@@ -50,18 +50,30 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/signup_but"
+        android:id="@+id/signup_BTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="162dp"
         android:layout_marginEnd="84dp"
         android:layout_marginStart="4dp"
-        android:text="Sign Up"
+        android:text="@string/sign_up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/login_but"
+        app:layout_constraintStart_toEndOf="@+id/login_BTN"
         app:layout_constraintTop_toBottomOf="@+id/pwd"
         app:layout_constraintVertical_bias="1.0" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="328dp"
+        android:layout_height="10dp"
+        android:layout_marginBottom="78dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginStart="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

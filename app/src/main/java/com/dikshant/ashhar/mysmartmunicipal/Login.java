@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -20,7 +20,8 @@ import java.sql.Statement;
 public class Login extends AppCompatActivity {
 
     EditText uid, pwd;
-    public String user_id, pass, qry;
+    String userId, pass, qry, toastShow;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +29,10 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         uid = (EditText) findViewById(R.id.uid);
         pwd = (EditText) findViewById(R.id.pwd);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
-        final Button button = (Button) findViewById(R.id.login_but);
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button login = (Button) findViewById(R.id.login_BTN);
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -41,25 +43,49 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+
+        final Button signup = (Button) findViewById(R.id.signup_BTN);
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intentMain = new Intent(Login.this,Signup.class);
+                    startActivity(intentMain);
+                } catch (Exception e) {
+                    Log.e("ERRO", e.getMessage());
+                }
+            }
+        });
     }
 
     class EstablishCon extends AsyncTask<String, String, String> {
 
         Boolean ifLogin=false;
+
+        @Override
+        protected void onPreExecute()
+        {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
         @Override
         protected String doInBackground(String... strings) {
             Connection con = null;
+
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "aezakmi1");
-                user_id=uid.getText().toString();
-                pass=pwd.getText().toString();
-                qry = "SELECT * FROM user WHERE userid = '" + user_id + "' and password = '" + pass+"'";
-                Statement stmt = con.createStatement();
-                ResultSet rSet = stmt.executeQuery(qry);
-                if (rSet.next())
-                    ifLogin=true;
-
+                con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
+                userId = uid.getText().toString();
+                pass = pwd.getText().toString();
+                if(userId.equals("")|| pass.equals(""))
+                    toastShow = "Please enter Username and Password";
+                else {
+                    qry = "SELECT * FROM user WHERE userid = '" + userId + "' and password = '" + pass + "'";
+                    Statement stmt = con.createStatement();
+                    ResultSet rSet = stmt.executeQuery(qry);
+                    if (rSet.next())
+                        ifLogin = true;
+                }
             } catch (SQLException se) {
                 Log.e("ERRO", se.getMessage());
             }catch (ClassNotFoundException e) {
@@ -75,11 +101,13 @@ public class Login extends AppCompatActivity {
         protected void onPostExecute(String s) {
            if (ifLogin) {
                Intent intentMain = new Intent(Login.this,HomePage.class);
-               intentMain.putExtra("user_id",user_id);
+                intentMain.putExtra("userId",userId);
                startActivity(intentMain);
-               Toast.makeText(getApplicationContext(), "Hello " + user_id, Toast.LENGTH_SHORT).show();
-           }else
-               Toast.makeText(getApplicationContext(), "Wrong Credentials" + user_id, Toast.LENGTH_SHORT).show();
+               Toast.makeText(getApplicationContext(), "Hello " + userId, Toast.LENGTH_SHORT).show();
+           }else if (!ifLogin)
+               Toast.makeText(getApplicationContext(), "Wrong Credentials" + userId, Toast.LENGTH_SHORT).show();
+            else
+               Toast.makeText(getApplicationContext(), toastShow + userId, Toast.LENGTH_SHORT).show();
         }
     }
 }
