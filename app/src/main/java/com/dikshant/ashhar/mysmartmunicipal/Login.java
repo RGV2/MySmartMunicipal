@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Connection;
@@ -20,8 +21,7 @@ import java.sql.Statement;
 public class Login extends AppCompatActivity {
 
     EditText uid, pwd;
-    String userId, pass, qry, toastShow;
-    ProgressBar progressBar;
+    String userId, pass, qry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,6 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         uid = (EditText) findViewById(R.id.uid);
         pwd = (EditText) findViewById(R.id.pwd);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         final Button login = (Button) findViewById(R.id.login_BTN);
         login.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +43,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
-        final Button signup = (Button) findViewById(R.id.signup_BTN);
+        final TextView signup = (TextView) findViewById(R.id.signup_tV);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,13 +59,7 @@ public class Login extends AppCompatActivity {
 
     class EstablishCon extends AsyncTask<String, String, String> {
 
-        Boolean ifLogin=false;
-
-        @Override
-        protected void onPreExecute()
-        {
-            progressBar.setVisibility(View.VISIBLE);
-        }
+        Boolean ifLogin=false,empty=false;
 
         @Override
         protected String doInBackground(String... strings) {
@@ -78,7 +71,7 @@ public class Login extends AppCompatActivity {
                 userId = uid.getText().toString();
                 pass = pwd.getText().toString();
                 if(userId.equals("")|| pass.equals(""))
-                    toastShow = "Please enter Username and Password";
+                    empty=true;
                 else {
                     qry = "SELECT * FROM user WHERE userid = '" + userId + "' and password = '" + pass + "'";
                     Statement stmt = con.createStatement();
@@ -104,10 +97,11 @@ public class Login extends AppCompatActivity {
                 intentMain.putExtra("userId",userId);
                startActivity(intentMain);
                Toast.makeText(getApplicationContext(), "Hello " + userId, Toast.LENGTH_SHORT).show();
-           }else if (!ifLogin)
-               Toast.makeText(getApplicationContext(), "Wrong Credentials" + userId, Toast.LENGTH_SHORT).show();
-            else
-               Toast.makeText(getApplicationContext(), toastShow + userId, Toast.LENGTH_SHORT).show();
+           }
+           if (!ifLogin)
+               Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+            if (empty)
+               Toast.makeText(getApplicationContext(), "Please enter User ID and Password", Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -17,5 +17,6 @@
     <string name="user_id">user id</string>
     <string name="login">LOGIN</string>
     <string name="sign_up">Sign Up</string>
+    <string name="don_t_have_account"><u>Don\'t have account</u></string>
 
 </resources>

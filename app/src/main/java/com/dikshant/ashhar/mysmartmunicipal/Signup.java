@@ -52,7 +52,7 @@ public class Signup extends AppCompatActivity {
 
     class SigningUp extends AsyncTask<String, String, String> {
 
-        Boolean ifSignup=false;
+        Boolean ifSignup=false,mailCor = false;
         @Override
         protected String doInBackground(String... strings) {
             Connection con = null;
@@ -68,6 +68,9 @@ public class Signup extends AppCompatActivity {
                     pass = passET.getText().toString();
                     passConf = passConfET.getText().toString();
                     if (name!=null && mail!=null && user!=null && contact!=null && aadhar!=null && pass!=null){
+                        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
+                            mailCor=true;
+                        }
                         qry = "INSERT INTO user (userid,email,password,name,contact,aadhar) VALUES(?,?,?,?,?,?)";
                         PreparedStatement stmt = con.prepareStatement(qry);
                         stmt.setString(1, user);
@@ -101,7 +104,10 @@ public class Signup extends AppCompatActivity {
                 Intent intentMain = new Intent(Signup.this,Login.class);
                 startActivity(intentMain);
                 Toast.makeText(getApplicationContext(), "Welcome " + name, Toast.LENGTH_SHORT).show();
-            }else
+            }
+            if (mailCor)
+                Toast.makeText(getApplicationContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
+                else
                 Toast.makeText(getApplicationContext(), toastShow, Toast.LENGTH_SHORT).show();
         }
     }
