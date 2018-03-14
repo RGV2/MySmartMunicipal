@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity {
                     EstablishCon establishCon = new EstablishCon();
                     establishCon.execute();
                 } catch (Exception e) {
-                    Log.e("ERRO", e.getMessage());
+                    Log.e("ERROR", e.getMessage());
                 }
             }
         });
@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity {
                     Intent intentMain = new Intent(Login.this,Signup.class);
                     startActivity(intentMain);
                 } catch (Exception e) {
-                    Log.e("ERRO", e.getMessage());
+                    Log.e("ERROR", e.getMessage());
                 }
             }
         });
