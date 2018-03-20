@@ -20,15 +20,15 @@ import java.sql.SQLException;
 public class Signup extends AppCompatActivity {
 
     EditText nameET,mailET,userET,contactET,aadharET,passET,passConfET;
-    String name,mail,user,contact,aadhar,pass,passConf,qry,toastShow;
-
-    boolean valid = true;
+    String name,mail,user,contact,aadhar,pass,qry,toastShow;
+    Connection con=null;
+    boolean valid = true,ifSignup=false;
+    Validation v = new Validation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
 
         final TextView back = (TextView) findViewById(R.id.back_tV);
         back.setOnClickListener(new View.OnClickListener() {
@@ -43,11 +43,8 @@ public class Signup extends AppCompatActivity {
             }
         });
 
-
         final Button button = (Button) findViewById(R.id.submit_BTN);
         button.setOnClickListener(new View.OnClickListener() {
-
-
 
             @Override
             public void onClick(View v) {
@@ -63,8 +60,6 @@ public class Signup extends AppCompatActivity {
     }
 
     class SigningUp extends AsyncTask<String, String, String> {
-
-        Boolean ifSignup=false; //mailCor = mail Correct
 
         @Override
         protected void onPreExecute() {
@@ -87,6 +82,7 @@ public class Signup extends AppCompatActivity {
 
             if (name!=null && mail!=null && user!=null && contact!=null && aadhar!=null && pass!=null){
                 if (passConfET.getText().toString().equals(pass)){
+
                     if(name.length()>45) {
                         nameET.setError("Please Enter Valid Name");
                         valid = false;
@@ -95,16 +91,30 @@ public class Signup extends AppCompatActivity {
                         mailET.setError("Please Enter Valid Email");
                         valid=false;
                     }
+                    if (!v.doInBackground(mail)){
+                        mailET.setError("email already exist!");
+                        valid = false;
+                    }
                     if(user.length()>16) {
-                        userET.setError("Please Enter Valid userID");
+                        userET.setError("Please Enter Valid user ID");
+                        valid = false;
+                    }
+                    if (!v.doInBackground(user)){
+                        userET.setError("User ID already exist!");
                         valid = false;
                     }
                     if((contact.length() != 10) || !(contact.startsWith("7") || contact.startsWith("8") || contact.startsWith("9"))){
                         contactET.setError("Please Enter Valid Contact No.");
                         valid = false;
                     }
+
+
                     if((aadhar.length() != 12) || (aadhar.startsWith("0") || aadhar.startsWith("1"))) {
                         aadharET.setError("Please Enter Valid AADHAR No.");
+                        valid = false;
+                    }
+                    if (!v.doInBackground(aadhar)){
+                        aadharET.setError("AADHAR already exist!");
                         valid = false;
                     }
                     if(pass.length()>32) {
@@ -121,13 +131,10 @@ public class Signup extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            Connection con;
 
                 try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
-
-                    if (valid && (con != null)){
+                    if (valid ){
+                        con = connection();
                             qry = "INSERT INTO user (userid,email,password,name,contact,aadhar) VALUES(?,?,?,?,?,?)";
                             PreparedStatement stmt = con.prepareStatement(qry);
                             stmt.setString(1, user);
@@ -140,12 +147,11 @@ public class Signup extends AppCompatActivity {
                                 ifSignup = true;
                             else
                                 toastShow = "Signup Unsuccessful";
+                            con.close();
                     }else onPreExecute();
 
                 } catch (SQLException se) {
                     Log.e("ERROR", se.getMessage());
-                } catch (ClassNotFoundException e) {
-                    Log.e("ERROR", e.getMessage());
                 } catch (Exception e) {
                     Log.e("ERROR", e.getMessage());
                 }
@@ -162,5 +168,18 @@ public class Signup extends AppCompatActivity {
             }else
                 Toast.makeText(getApplicationContext(), toastShow, Toast.LENGTH_SHORT).show();
         }
+    }
+    static Connection connection(){
+
+        Connection con=null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return con;
     }
 }

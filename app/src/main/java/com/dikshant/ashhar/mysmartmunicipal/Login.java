@@ -1,6 +1,8 @@
 package com.dikshant.ashhar.mysmartmunicipal;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,7 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+import android.content.SharedPreferences.Editor;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ public class Login extends AppCompatActivity {
 
     EditText uid, pwd;
     String userId, pass, qry;
+    SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,15 @@ public class Login extends AppCompatActivity {
         Boolean ifLogin=false,empty=false;
 
         @Override
+        protected void onPreExecute(){
+            Intent intent = null;
+            if(sharedPreferences.getString("key","").equals(uid.getText().toString())) {
+                intent = new Intent(Login.this, HomePage.class);
+                startActivity(intent);
+            }
+        }
+
+        @Override
         protected String doInBackground(String... strings) {
             Connection con = null;
 
@@ -76,8 +88,13 @@ public class Login extends AppCompatActivity {
                     qry = "SELECT * FROM user WHERE userid = '" + userId + "' and password = '" + pass + "'";
                     Statement stmt = con.createStatement();
                     ResultSet rSet = stmt.executeQuery(qry);
-                    if (rSet.next())
+                    if (rSet.next()){
                         ifLogin = true;
+                        Editor editor = sharedPreferences.edit();
+                        editor.putString("key",userId);
+                        editor.apply();
+                    }
+
                 }
             } catch (SQLException se) {
                 Log.e("ERRO", se.getMessage());
@@ -105,5 +122,3 @@ public class Login extends AppCompatActivity {
         }
     }
 }
-
-
