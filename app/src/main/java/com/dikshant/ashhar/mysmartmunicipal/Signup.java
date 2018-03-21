@@ -132,35 +132,33 @@ public class Signup extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
 
-                try {
-                    if (valid ){
-                        con = connection();
-                            qry = "INSERT INTO user (userid,email,password,name,contact,aadhar) VALUES(?,?,?,?,?,?)";
-                            PreparedStatement stmt = con.prepareStatement(qry);
-                            stmt.setString(1, user);
-                            stmt.setString(2, mail);
-                            stmt.setString(3, pass);
-                            stmt.setString(4, name);
-                            stmt.setString(5, contact);
-                            stmt.setString(6, aadhar);
-                            if (stmt.executeUpdate() > 0)
-                                ifSignup = true;
-                            else
-                                toastShow = "Signup Unsuccessful";
-                            con.close();
-                    }else onPreExecute();
-
-                } catch (SQLException se) {
-                    Log.e("ERROR", se.getMessage());
-                } catch (Exception e) {
-                    Log.e("ERROR", e.getMessage());
-                }
+            try {
+                if (valid ){
+                    con = connection();
+                    qry = "INSERT INTO user (userid,email,password,name,contact,aadhar) VALUES(?,?,?,?,?,?)";
+                    PreparedStatement stmt = con.prepareStatement(qry);
+                    stmt.setString(1, user);
+                    stmt.setString(2, mail);
+                    stmt.setString(3, pass);
+                    stmt.setString(4, name);
+                    stmt.setString(5, contact);
+                    stmt.setString(6, aadhar);
+                    if (stmt.executeUpdate() > 0)
+                        ifSignup = true;
+                    else
+                        toastShow = "Signup Unsuccessful";
+                    con.close();
+                }else onPreExecute();
+            } catch (SQLException se) {
+                Log.e("ERROR", se.getMessage());
+            } catch (Exception e) {
+                Log.e("ERROR", e.getMessage());
+            }
             return null;
         }
 
         @Override
         protected void onPostExecute(String s) {
-
             if (ifSignup) {
                 Intent intentMain = new Intent(Signup.this,Login.class);
                 startActivity(intentMain);
@@ -170,7 +168,6 @@ public class Signup extends AppCompatActivity {
         }
     }
     static Connection connection(){
-
         Connection con=null;
         try {
             Class.forName("com.mysql.jdbc.Driver");

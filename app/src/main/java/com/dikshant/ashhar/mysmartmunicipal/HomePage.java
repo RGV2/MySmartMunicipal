@@ -47,17 +47,17 @@ public class HomePage extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-//        Button signup = (Button) findViewById(R.id.logout_btn);
-//        signup.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.remove("key");
-//                editor.apply();
-//                finish();
-//            }
-//        });
+        Button logout = (Button) findViewById(R.id.logout_btn);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("key");
+                editor.apply();
+                finish();
+            }
+        });
     }
 
     @Override
@@ -74,9 +74,7 @@ public class HomePage extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         Intent intent = getIntent();
-        String username = intent.getExtras().getString("userId");
         TextView textView = (TextView) findViewById(R.id.mainUser);
-        textView.setText(username);
         getMenuInflater().inflate(R.menu.home_page, menu);
         return true;
     }

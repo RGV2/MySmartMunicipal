@@ -15,7 +15,6 @@ import java.sql.Statement;
 
 public class Validation extends AsyncTask<String, String, Boolean> {
     Connection con = null;
-    String qry;
     boolean valid = false;
 
     @Override

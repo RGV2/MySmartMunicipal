@@ -21,18 +21,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Login extends AppCompatActivity {
-
     EditText uid, pwd;
     String userId, pass, qry;
-    SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         uid = (EditText) findViewById(R.id.uid);
         pwd = (EditText) findViewById(R.id.pwd);
-
         final Button login = (Button) findViewById(R.id.login_BTN);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +49,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    Intent intentMain = new Intent(Login.this,Signup.class);
+                    Intent intentMain = new Intent(Login.this, Signup.class);
                     startActivity(intentMain);
                 } catch (Exception e) {
                     Log.e("ERROR", e.getMessage());
@@ -62,46 +60,33 @@ public class Login extends AppCompatActivity {
 
     class EstablishCon extends AsyncTask<String, String, String> {
 
-        Boolean ifLogin=false,empty=false;
-
-        @Override
-        protected void onPreExecute(){
-            Intent intent = null;
-            if(sharedPreferences.getString("key","").equals(uid.getText().toString())) {
-                intent = new Intent(Login.this, HomePage.class);
-                startActivity(intent);
-            }
-        }
+        Boolean empty = false, ifLogin = false;
 
         @Override
         protected String doInBackground(String... strings) {
             Connection con = null;
 
             try {
-                Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
+                con = connection();
                 userId = uid.getText().toString();
                 pass = pwd.getText().toString();
-                if(userId.equals("")|| pass.equals(""))
-                    empty=true;
+                if (userId.equals("") || pass.equals(""))
+                    empty = true;
                 else {
                     qry = "SELECT * FROM user WHERE userid = '" + userId + "' and password = '" + pass + "'";
                     Statement stmt = con.createStatement();
                     ResultSet rSet = stmt.executeQuery(qry);
-                    if (rSet.next()){
+                    if (rSet.next()) {
                         ifLogin = true;
+                        SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
                         Editor editor = sharedPreferences.edit();
-                        editor.putString("key",userId);
-                        editor.apply();
+                        editor.putString("key", userId);
+                        editor.commit();
                     }
-
                 }
             } catch (SQLException se) {
                 Log.e("ERRO", se.getMessage());
-            }catch (ClassNotFoundException e) {
-                Log.e("ERRO", e.getMessage());
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Log.e("ERRO", e.getMessage());
             }
             return null;
@@ -109,16 +94,26 @@ public class Login extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-           if (ifLogin) {
-               Intent intentMain = new Intent(Login.this,HomePage.class);
-                intentMain.putExtra("userId",userId);
-               startActivity(intentMain);
-               Toast.makeText(getApplicationContext(), "Hello " + userId, Toast.LENGTH_SHORT).show();
-           }
-           if (!ifLogin)
-               Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+            if (ifLogin) {
+                Intent intentMain = new Intent(Login.this, HomePage.class);
+                intentMain.putExtra("userId", userId);
+                startActivity(intentMain);
+            }if (!ifLogin)
+                Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
             if (empty)
-               Toast.makeText(getApplicationContext(), "Please enter User ID and Password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please enter User ID and Password", Toast.LENGTH_SHORT).show();
+            }
+    }
+    static Connection connection() {
+        Connection con = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return con;
     }
 }
