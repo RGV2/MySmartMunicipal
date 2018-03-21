@@ -41,10 +41,13 @@ public class Starter extends AppCompatActivity {
                     check = true;
                 else
                     check = false;
+                con.close();
+
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             return null;
+
         }
 
         @Override
@@ -53,7 +56,7 @@ public class Starter extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Welcome Back "+pref, Toast.LENGTH_SHORT).show();
                 Intent intentMain = new Intent(Starter.this, HomePage.class);
                 startActivity(intentMain);
-            } else{
+            } if (!check){
                 Toast.makeText(getApplicationContext(), "Please Login to Continue", Toast.LENGTH_SHORT).show();
 
                 Intent intentMain = new Intent(Starter.this, Login.class);

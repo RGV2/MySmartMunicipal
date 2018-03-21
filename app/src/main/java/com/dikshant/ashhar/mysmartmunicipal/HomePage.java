@@ -55,7 +55,9 @@ public class HomePage extends AppCompatActivity
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.remove("key");
                 editor.apply();
-                finish();
+                Intent intentMain = new Intent(HomePage.this, Starter.class);
+                startActivity(intentMain);
+
             }
         });
     }

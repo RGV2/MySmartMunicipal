@@ -15,7 +15,7 @@ import java.sql.Statement;
 
 public class Validation extends AsyncTask<String, String, Boolean> {
     Connection con = null;
-    boolean valid = false;
+    boolean valid = true;
 
     @Override
     protected Boolean doInBackground(String... strings) {
@@ -32,6 +32,8 @@ public class Validation extends AsyncTask<String, String, Boolean> {
                 rSet = stmt.executeQuery("SELECT * FROM user WHERE userid = '" + s + "'");
             }
             if (rSet.next())
+                valid = false;
+            else
                 valid = true;
             con.close();
         }catch (SQLException se) {

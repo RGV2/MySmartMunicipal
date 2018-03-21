@@ -91,7 +91,7 @@ public class Signup extends AppCompatActivity {
                         mailET.setError("Please Enter Valid Email");
                         valid=false;
                     }
-                    if (!v.doInBackground(mail)){
+                    if (v.doInBackground(mail)==false){
                         mailET.setError("email already exist!");
                         valid = false;
                     }
@@ -99,7 +99,7 @@ public class Signup extends AppCompatActivity {
                         userET.setError("Please Enter Valid user ID");
                         valid = false;
                     }
-                    if (!v.doInBackground(user)){
+                    if (v.doInBackground(user)==false){
                         userET.setError("User ID already exist!");
                         valid = false;
                     }
@@ -113,7 +113,7 @@ public class Signup extends AppCompatActivity {
                         aadharET.setError("Please Enter Valid AADHAR No.");
                         valid = false;
                     }
-                    if (!v.doInBackground(aadhar)){
+                    if (v.doInBackground(aadhar)==false){
                         aadharET.setError("AADHAR already exist!");
                         valid = false;
                     }
@@ -133,7 +133,7 @@ public class Signup extends AppCompatActivity {
         protected String doInBackground(String... strings) {
 
             try {
-                if (valid ){
+                if (valid){
                     con = connection();
                     qry = "INSERT INTO user (userid,email,password,name,contact,aadhar) VALUES(?,?,?,?,?,?)";
                     PreparedStatement stmt = con.prepareStatement(qry);
