@@ -67,7 +67,7 @@ public class Login extends AppCompatActivity {
             Connection con = null;
 
             try {
-                con = connection();
+                con = Starter.connection();
                 userId = uid.getText().toString();
                 pass = pwd.getText().toString();
                 if (userId.equals("") || pass.equals(""))
@@ -84,6 +84,8 @@ public class Login extends AppCompatActivity {
                         editor.commit();
                     }
                 }
+                con.close();
+
             } catch (SQLException se) {
                 Log.e("ERRO", se.getMessage());
             } catch (Exception e) {
@@ -104,16 +106,16 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Please enter User ID and Password", Toast.LENGTH_SHORT).show();
             }
     }
-    static Connection connection() {
-        Connection con = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return con;
-    }
+//    static Connection connection() {
+//        Connection con = null;
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//            con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
+//        } catch (ClassNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return con;
+//    }
 }

@@ -15,25 +15,25 @@ import java.sql.Statement;
 
 public class Validation extends AsyncTask<String, String, Boolean> {
     Connection con = null;
-    boolean valid = true;
+    String qry;
+    boolean valid = false;
 
     @Override
     protected Boolean doInBackground(String... strings) {
         String s= strings[0];
         try {
             ResultSet rSet;
-            con=Signup.connection();
+            con=Starter.connection();
+
             Statement stmt = con.createStatement();
-            if (s.length()==10 && android.text.TextUtils.isDigitsOnly(s)) {
-                rSet = stmt.executeQuery("SELECT * FROM user WHERE contact = '" + s + "'");
+            if (s.length()==12 && android.text.TextUtils.isDigitsOnly(s)) {
+                rSet = stmt.executeQuery("SELECT * FROM user WHERE aadhar = '" + s + "'");
             }else if (Patterns.EMAIL_ADDRESS.matcher(s).matches()) {
                 rSet = stmt.executeQuery("SELECT * FROM user WHERE email = '" + s + "'");
             }else {
                 rSet = stmt.executeQuery("SELECT * FROM user WHERE userid = '" + s + "'");
             }
             if (rSet.next())
-                valid = false;
-            else
                 valid = true;
             con.close();
         }catch (SQLException se) {

@@ -32,9 +32,10 @@ public class Starter extends AppCompatActivity {
             SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
             pref=sharedPreferences.getString("key","");
             String qry = "SELECT * FROM user where userid = '"+pref+"'";
-            Connection con = connection();
             Statement stmt = null;
             try {
+                Connection con = connection();
+
                 stmt = con.createStatement();
                 ResultSet rSet = stmt.executeQuery(qry);
                 if (rSet.next())
@@ -65,11 +66,12 @@ public class Starter extends AppCompatActivity {
         }
     }
 
-    static Connection connection() {
+    static Connection connection(){
         Connection con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
+            return con;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException e) {
