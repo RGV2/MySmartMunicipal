@@ -65,7 +65,7 @@ public class Signup extends AppCompatActivity {
         Boolean ifSignup=false,valid=true;
         @Override
         protected void onPreExecute() {
-            valid=true;
+//            valid=true;
 
             nameET = (EditText) findViewById(R.id.name_ET);
             mailET = (EditText) findViewById(R.id.mail_ET);
@@ -93,7 +93,7 @@ public class Signup extends AppCompatActivity {
                         mailET.setError("Please Enter Valid Email");
                         valid=false;
                     }
-                    if (v.doInBackground(mail)){
+                    if (v.doInBackground(mail,"email")){
                         mailET.setError("email already exist!");
                         valid = false;
                     }
@@ -101,7 +101,7 @@ public class Signup extends AppCompatActivity {
                         userET.setError("Please Enter Valid user ID");
                         valid = false;
                     }
-                    if (v.doInBackground(user)){
+                    if (v.doInBackground(user,"user")){
                         userET.setError("User ID already exist!");
                         valid = false;
                     }
@@ -115,7 +115,7 @@ public class Signup extends AppCompatActivity {
                         aadharET.setError("Please Enter Valid AADHAR No.");
                         valid = false;
                     }
-                    if (v.doInBackground(aadhar)){
+                    if (v.doInBackground(aadhar,"aadhar")){
                         aadharET.setError("AADHAR already exist!");
                         valid = false;
                     }
@@ -139,7 +139,7 @@ public class Signup extends AppCompatActivity {
             Connection con;
 
             try {
-                con = Starter.connection();
+                con = connection();
 
                 if (valid){
                     qry = "INSERT INTO user (userid,email,password,name,contact,aadhar) VALUES(?,?,?,?,?,?)";
@@ -150,9 +150,9 @@ public class Signup extends AppCompatActivity {
                     stmt.setString(4, name);
                     stmt.setString(5, contact);
                     stmt.setString(6, aadhar);
-                    if (stmt.executeUpdate() == 6)
+                    if (stmt.executeUpdate() > 0) {
                         ifSignup = true;
-                    else
+                    } else
                         toastShow = "Signup Unsuccessful";
                     con.close();
                 }
@@ -169,11 +169,24 @@ public class Signup extends AppCompatActivity {
             if (ifSignup) {
                 Intent intentMain = new Intent(Signup.this,Login.class);
                 startActivity(intentMain);
-                Toast.makeText(getApplicationContext(), "Welcome " + name, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Sign Up Successful! " + name, Toast.LENGTH_SHORT).show();
             }if (!valid){
                 Toast.makeText(getApplicationContext(), toastShow, Toast.LENGTH_SHORT).show();
-//                onPreExecute();
             }
         }
+    }
+
+    static Connection connection(){
+        Connection con = null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
+            return con;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return con;
     }
 }
