@@ -22,7 +22,7 @@ import java.sql.Statement;
 
 public class Login extends AppCompatActivity {
     EditText uid, pwd;
-    String userId, pass, qry;
+    String userId, pass, qry, qry1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +74,17 @@ public class Login extends AppCompatActivity {
                     empty = true;
                 else {
                     qry = "SELECT * FROM user WHERE userid = '" + userId + "' and password = '" + pass + "'";
+                    qry1 = "SELECT email FROM user where userid='" + userId + "'";
                     Statement stmt = con.createStatement();
                     ResultSet rSet = stmt.executeQuery(qry);
+
                     if (rSet.next()) {
                         ifLogin = true;
                         SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
                         Editor editor = sharedPreferences.edit();
                         editor.putString("key", userId);
+                        ResultSet rSet1 =stmt.executeQuery(qry1);
+                        editor.putString("key1", rSet1.toString());
                         editor.commit();
                     }
                 }

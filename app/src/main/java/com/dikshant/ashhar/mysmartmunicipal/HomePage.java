@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -44,22 +45,37 @@ public class HomePage extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                int id = item.getItemId();
+//                switch (id) {
+//                    case R.id.nav_logout:
+//                        SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
+//                        SharedPreferences.Editor editor = sharedPreferences.edit();
+//                        editor.remove("key");
+//                        editor.apply();
+//                        Intent intentMain = new Intent(HomePage.this, Starter.class);
+//                        startActivity(intentMain);
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
 
-
-        Button logout = (Button) findViewById(R.id.logout_btn);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.remove("key");
-                editor.apply();
-                Intent intentMain = new Intent(HomePage.this, Starter.class);
-                startActivity(intentMain);
-
-            }
-        });
+//        Button logout = (Button) findViewById(R.id.logout_btn);
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                editor.remove("key");
+//                editor.apply();
+//                Intent intentMain = new Intent(HomePage.this, Starter.class);
+//                startActivity(intentMain);
+//
+//            }
+//        });
     }
 
     @Override
@@ -87,12 +103,21 @@ public class HomePage extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
 
+        switch(item.getItemId()){
+            case R.id.nav_logout:
+                SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("key");
+                editor.apply();
+                Intent intentMain = new Intent(HomePage.this, Starter.class);
+                startActivity(intentMain);
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -102,17 +127,19 @@ public class HomePage extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_grievance) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_helpline) {
 
-        } else if (id == R.id.nav_slideshow) {
+        }
+// else if (id == R.id.nav_sos) {
+//
+//        } else if (id == R.id.nav_manage) {
+//
+//        }
+        else if (id == R.id.nav_aboutus) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_help) {
 
         }
 

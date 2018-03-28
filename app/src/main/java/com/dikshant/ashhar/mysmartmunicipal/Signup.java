@@ -150,12 +150,16 @@ public class Signup extends AppCompatActivity {
                     stmt.setString(4, name);
                     stmt.setString(5, contact);
                     stmt.setString(6, aadhar);
-                    if (stmt.executeUpdate() > 0) {
+                    if (stmt.executeUpdate()>0) {
                         ifSignup = true;
-                    } else
-                        toastShow = "Signup Unsuccessful";
+                    }
+                    else
+                    {
+                        toastShow="SignUp Unsuccessful!";
+                    }
                     con.close();
                 }
+
             } catch (SQLException se) {
                 Log.e("ERROR", se.getMessage());
             } catch (Exception e) {
@@ -170,7 +174,8 @@ public class Signup extends AppCompatActivity {
                 Intent intentMain = new Intent(Signup.this,Login.class);
                 startActivity(intentMain);
                 Toast.makeText(getApplicationContext(), "Sign Up Successful! " + name, Toast.LENGTH_SHORT).show();
-            }if (!valid){
+            }
+            if (valid==false){
                 Toast.makeText(getApplicationContext(), toastShow, Toast.LENGTH_SHORT).show();
             }
         }
@@ -180,7 +185,7 @@ public class Signup extends AppCompatActivity {
         Connection con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
+            con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "aezakmi1");
             return con;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
