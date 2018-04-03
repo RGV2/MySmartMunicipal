@@ -69,7 +69,7 @@ public class Starter extends AppCompatActivity {
         Connection con = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "aezakmi1");
+            con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
             return con;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

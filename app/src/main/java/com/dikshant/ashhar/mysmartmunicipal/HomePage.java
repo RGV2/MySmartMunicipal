@@ -17,7 +17,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
+
+import java.sql.Array;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import static android.media.CamcorderProfile.get;
 
 public class HomePage extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -128,23 +139,42 @@ public class HomePage extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_grievance) {
-            // Handle the camera action
-        } else if (id == R.id.nav_helpline) {
 
         }
-// else if (id == R.id.nav_sos) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        }
+        else if (id == R.id.nav_helpline) {
+            ArrayList<Helpline> list=helplist();
+            TableLayout table=(TableLayout)findViewById(R.id.table_helpline);
+            for(int i=0;i<list.size();i++){
+//                TableRow row=new TableRow(this);
+                System.out.println(list);
+            }
+        }
         else if (id == R.id.nav_aboutus) {
 
-        } else if (id == R.id.nav_help) {
+        }
+        else if (id == R.id.nav_help) {
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public ArrayList<Helpline> helplist() {
+        Connection con=Starter.connection();
+        String qry = "SELECT * FROM user";
+        ArrayList<Helpline> helplinelist=new ArrayList<>();
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet r = stmt.executeQuery(qry);
+            Helpline help;
+            while (r.next()) {
+                help=new Helpline(r.getString("name"),r.getString("phoneno"));
+                helplinelist.add(help);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return helplinelist;
     }
 }
