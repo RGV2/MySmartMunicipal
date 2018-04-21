@@ -35,6 +35,7 @@ public class Starter extends AppCompatActivity {
             Statement stmt = null;
             try {
                 Connection con = connection();
+
                 stmt = con.createStatement();
                 ResultSet rSet = stmt.executeQuery(qry);
                 if (rSet.next())
@@ -54,7 +55,7 @@ public class Starter extends AppCompatActivity {
         protected void onPostExecute(String s) {
             if (check){
                 Toast.makeText(getApplicationContext(), "Welcome Back "+pref, Toast.LENGTH_SHORT).show();
-                Intent intentMain = new Intent(Starter.this, HomePage.class);
+                Intent intentMain = new Intent(Starter.this, Home.class);
                 startActivity(intentMain);
             } if (!check){
                 Toast.makeText(getApplicationContext(), "Please Login to Continue", Toast.LENGTH_SHORT).show();

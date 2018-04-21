@@ -109,8 +109,10 @@ public class Signup extends AppCompatActivity {
                         contactET.setError("Please Enter Valid Contact No.");
                         valid = false;
                     }
-
-
+                    if(aadhar.length() != 12) {
+                        aadharET.setError("Please Enter Valid AADHAR No.");
+                        valid = false;
+                    }
                     if((aadhar.length() != 12) || (aadhar.startsWith("0") || aadhar.startsWith("1"))) {
                         aadharET.setError("Please Enter Valid AADHAR No.");
                         valid = false;
@@ -150,16 +152,12 @@ public class Signup extends AppCompatActivity {
                     stmt.setString(4, name);
                     stmt.setString(5, contact);
                     stmt.setString(6, aadhar);
-                    if (stmt.executeUpdate()>0) {
+                    if (stmt.executeUpdate() > 0) {
                         ifSignup = true;
-                    }
-                    else
-                    {
-                        toastShow="SignUp Unsuccessful!";
-                    }
+                    } else
+                        toastShow = "Signup Unsuccessful";
                     con.close();
                 }
-
             } catch (SQLException se) {
                 Log.e("ERROR", se.getMessage());
             } catch (Exception e) {
@@ -174,8 +172,7 @@ public class Signup extends AppCompatActivity {
                 Intent intentMain = new Intent(Signup.this,Login.class);
                 startActivity(intentMain);
                 Toast.makeText(getApplicationContext(), "Sign Up Successful! " + name, Toast.LENGTH_SHORT).show();
-            }
-            if (valid==false){
+            }if (!valid){
                 Toast.makeText(getApplicationContext(), toastShow, Toast.LENGTH_SHORT).show();
             }
         }

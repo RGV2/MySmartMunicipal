@@ -101,7 +101,7 @@ public class Login extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if (ifLogin) {
-                Intent intentMain = new Intent(Login.this, HomePage.class);
+                Intent intentMain = new Intent(Login.this, Home.class);
                 intentMain.putExtra("userId", userId);
                 startActivity(intentMain);
             }if (!ifLogin)
@@ -110,16 +110,4 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Please enter User ID and Password", Toast.LENGTH_SHORT).show();
             }
     }
-//    static Connection connection() {
-//        Connection con = null;
-//        try {
-//            Class.forName("com.mysql.jdbc.Driver");
-//            con = DriverManager.getConnection("jdbc:mysql://10.0.2.2:3306/municipal_server", "root", "123456");
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return con;
-//    }
 }

@@ -21,4 +21,210 @@
     <string name="back">Back</string>
     <string name="already_exist">Already exist</string>
 
+    <string-array name="departments">
+        <item>Select Department</item>
+        <item>Airlines(Domestic)</item>
+        <item>Airlines(International)</item>
+        <item>Blood Banks</item>
+        <item>Bomb Disposal Squads</item>
+        <item>Bus Services</item>
+        <item>Cremation Grounds</item>
+        <item>Deputy Commissioners of Delhi</item>
+        <item>Educational Board/Institutions</item>
+        <item>Eye Banks</item>
+        <item>Fire Services</item>
+        <item>Hospitals</item>
+        <item>Medical Stores(24 Hrs)</item>
+        <item>Other Important Numbers</item>
+        <item>Police</item>
+        <item>Post Offices</item>
+        <item>Press</item>
+        <item>Railways</item>
+    </string-array>
+
+    <string-array name="grievance_list">
+        <item>Select Department</item>
+        <item>DELHI JAL BOARD</item>
+        <item>DELHI POLICE</item>
+        <item>BSES RAJDHANI POWER LTD</item>
+        <item>BSES YAMUNA POWER LTD</item>
+        <item>TATA POWER DELHI DISTRIBUTION LTD</item>
+        <item>MCD EAST</item>
+        <item>MCD NORTH</item>
+        <item>MCD SOUTH</item>
+        <item>NEW DELHI MUNICIPAL COUNCIL</item>
+        <item>DELHI DEVELOPMENT AUTHORITY</item>
+        <item>EDUCATION</item>
+        <item>FOOD SUPPLIES AND CONSUMER AFFAIRS </item>
+        <item>LABOUR</item>
+        <item>DELHI TRANSPORT CORPORATION</item>
+        <item>TRANSPORT DEPARTMENT</item>
+        <item>A AND  U TIBBIA COLLEGE</item>
+        <item>ACHARYASHRI BHIKSHU GOVT HOSPITAL</item>
+        <item>ADMINISTRATIVE REFORMS</item>
+        <item>AGRICULTURE AND MARKETING</item>
+        <item>AMBEDKAR INSTITUTE OF TECHNOLOGY</item>
+        <item>AMBEDKAR POLYTECHNIC</item>
+        <item>ARCHAEOLOGY</item>
+        <item>ARCHIEVES</item>
+        <item>ART CULTURE AND LANGUAGE</item>
+        <item>ARUNA ASAF ALI GOVERNMENT HOSPITAL</item>
+        <item>ARYABHAT POLYTECHNIC</item>
+        <item>AUDIT</item>
+        <item>BOARD OF HOMEOPATHIC SYSTEM OF MEDICINE</item>
+        <item>BTC PUSA</item>
+        <item>CENTRAL ACCIDENT AND TRAUMA SERVICES</item>
+        <item>CHIEF ELECTORAL OFFICER</item>
+        <item>CHIEF SECRETARY OFFICE</item>
+        <item>CIVIL DEFENCE</item>
+        <item>CM OFFICE</item>
+        <item>COMMISSION FOR OTHER BACKWARD CLASSES</item>
+        <item>Commissioner for Persons with Disabilities, GNCTD</item>
+        <item>CONSUMER AFFAIRS</item>
+        <item>DC SHAHDARA</item>
+        <item>DC CENTRAL</item>
+        <item>DC EAST</item>
+        <item>DC NEW DELHI</item>
+        <item>DC NORTH</item>
+        <item>DC NORTH EAST</item>
+        <item>DC NORTH WEST</item>
+        <item>DC SOUTH</item>
+        <item>DC SOUTH EAST</item>
+        <item>DC SOUTH WEST</item>
+        <item>DC WEST</item>
+        <item>DELHI AGRICULTURAL MARKETING BOARD</item>
+        <item>DELHI BHARTIYA CHIKITSA PARISHAD</item>
+        <item>DELHI COMMISSION FOR SAFAI KARAMCHARI</item>
+        <item>DELHI COMMISSION FOR WOMEN</item>
+        <item>DELHI CONSUMER COOPERATIVE S WHOLESALE STORE LTD</item>
+        <item>DELHI COOPERATIVE HOUSING FINANCE  CORPN LTD</item>
+        <item>Delhi Council of Physiotherapy and Occupational Therapy</item>
+        <item>DELHI EGOVERNANCE SOCIETY</item>
+        <item>DELHI ELECTRICITY REGULATORY COMMISSION</item>
+        <item>DELHI FINANCIAL CORPORATION</item>
+        <item>DELHI FIRE SERVICE</item>
+        <item>DELHI INSTITUTE OF HOTEL MANAGEMENT AND CATERING TECHNOLOGY</item>
+        <item>DELHI INSTITUTE OF PHARMACEUTICAL SCIENCE AND RESEARCH</item>
+        <item>DELHI INTEGRATED MULTI MODEL TRANSIT SYSTEM LTD</item>
+        <item>DELHI KHADI AND VILLAGE INDUSTRIES BOARD</item>
+        <item>DELHI LABOUR WELFARE BOARD</item>
+        <item>Delhi Legal Services Authority</item>
+        <item>DELHI LEGISLATIVE ASSEMBLY</item>
+        <item>Delhi Medical Council</item>
+        <item>DELHI METRO RAIL CORPORATION</item>
+        <item>DELHI MINORITIES COMMISSION</item>
+        <item>DELHI NURSING  COUNCIL</item>
+        <item>DELHI PHARMACY COUNCIL</item>
+        <item>DELHI POLLUTION CONTROL COMMITTEE</item>
+        <item>DELHI SC/ST/OBC/MINORITIES, HANDICAPPED FINANCIAL AND DEVELOPMENT CORPORATION</item>
+        <item>DELHI SCHOOL TRIBUNAL</item>
+        <item>DELHI STATE AIDS CONTROL SOCIETY</item>
+        <item>DELHI STATE CANCER INSTITUTE</item>
+        <item>DELHI STATE CIVIL SUPPLIES CORPORATION LTD</item>
+        <item>DELHI STATE CONSUMER COOPERATIVE FEDERATION LIMITED</item>
+        <item>DELHI STATE DENTAL COUNCIL</item>
+        <item>DELHI STATE ELECTION COMMISSION</item>
+        <item>DELHI STATE HAJ COMMITTEE</item>
+        <item>DELHI STATE HEALTH MISSION</item>
+        <item>DELHI STATE INDUSTRIAL AND INFRASTRUCTURE DEV CORPORATION LTD</item>
+        <item>DELHI SUBORDINATE SERVICES SELECTION BOARD</item>
+        <item>DELHI TECHNOLOGICAL UNIVERSITY</item>
+        <item>DELHI TOURISM AND TRANSPORTATION DEV CORPORATION  LTD</item>
+        <item>DELHI TRANSCO LTD</item>
+        <item>Delhi Transport Infrastructure Development Corporation Limited</item>
+        <item>DELHI UNIVERSITY</item>
+        <item>DELHI URBAN SHELTER IMPROVEMENT BOARD</item>
+        <item>DELHI WAKF BOARD</item>
+        <item>DEVELOPMENT DEPARTMENT</item>
+        <item>DG PRISONS, TIHAR JAIL</item>
+        <item>DIRECTOR GENERAL OF HOME GUARD</item>
+        <item>DIRECTOR HEALTH SERVICES</item>
+        <item>DIRECTOR LOCAL BODIES</item>
+        <item>DIRECTOR PANCHAYAT</item>
+        <item>DRUGS CONTROL</item>
+        <item>ECONOMICS AND STATISTICS AND CHIEF REGISTRAR, BIRTH AND DEATH</item>
+        <item>EMPLOYMENT</item>
+        <item>ENVIRONMENT</item>
+        <item>EXCISE ENTT AND LUXURY TAX </item>
+        <item>FAMILY WELFARE</item>
+        <item>FINANCE</item>
+        <item>FOOD SAFETY DEPARTMENT</item>
+        <item>FORENSIC SCIENCE LABORATORY</item>
+        <item>FORESTS AND WILDLIFE</item>
+        <item>GENERAL ADMINISTRATION DEPARTMENT</item>
+        <item>GEO SPATIAL DELHI LTD</item>
+        <item>HEALTH AND FAMILY WELFARE</item>
+        <item>HEALTH CENTRE  CUM MATERNITY CENTRE, KANTI NAGAR</item>
+        <item>HEDGEWAR AROGYA SANSTHAN, HOSPITAL</item>
+        <item>HIGHER EDUCATION</item>
+        <item>HINDI ACADEMY</item>
+        <item>HOME</item>
+        <item>INDIAN SYSTEM OF MEDICINE AND HOMEOPATHY</item>
+        <item>INDRAPRASTHA GAS LTD</item>
+        <item>INDRAPRASTHA INSTITUTE OF INFORMATION TECHNOLOGY</item>
+        <item>INDUSTRIES</item>
+        <item>INFORMATION AND PUBLICITY</item>
+        <item>INFORMATION TECHNOLOGY</item>
+        <item>INSTITUTE OF HUMAN BEHAVIOUR AND ALLIED SCIENCES</item>
+        <item>INSTITUTE OF LIVER AND BILIARY SCIENCES</item>
+        <item>INTEGRATED INSITITUTE OF TECHNOLOGY</item>
+        <item>IRRIGATION AND FLOOD CONTROL</item>
+        <item>JUSTICE AND LEGISLATIVE AFFAIRS</item>
+        <item>LAC CENTRAL</item>
+        <item>LAC EAST</item>
+        <item>LAC NEW DELHI</item>
+        <item>LAC NORTH</item>
+        <item>LAC NORTH EAST</item>
+        <item>LAC NORTH WEST</item>
+        <item>LAC SHAHDARA</item>
+        <item>LAC SOUTH</item>
+        <item>LAC SOUTH EAST</item>
+        <item>LAC SOUTH WEST</item>
+        <item>LAC WEST</item>
+        <item>LAND AND BUILDING</item>
+        <item>MAULANA AZAD MEDICAL COLLEGE</item>
+        <item>MISSION CONVERGENCE</item>
+        <item>NATIONAL LAW UNIVERSITY</item>
+        <item>NCC</item>
+        <item>PLANNING DEPARTMENT</item>
+        <item>POWER</item>
+        <item>PRINCIPAL ACCOUNTS OFFICE</item>
+        <item>PROHIBITION</item>
+        <item>PROSECUTION</item>
+        <item>PUBLIC GRIEVANCE COMMISSION</item>
+        <item>PUBLIC WORKS DEPARTMENT</item>
+        <item>PUSA POLYTECHNIC</item>
+        <item>PWD East</item>
+        <item>PWD North</item>
+        <item>PWD South</item>
+        <item>REGISTRAR OF SOCIETY</item>
+        <item>REVENUE DEPARTMENT</item>
+        <item>SANSKRIT ACADEMY </item>
+        <item>SERVICES DEPARTMENT</item>
+        <item>SMALL SAVINGS AND LOTTERIES</item>
+        <item>SOCIAL WELFARE</item>
+        <item>STATE COUNCIL OF EDUCATION RESEARCH AND TRAINING</item>
+        <item>The Delhi Commission for Protection of Child Rights </item>
+        <item>TOURISM</item>
+        <item>TRADE AND TAXES</item>
+        <item>TRAINING AND TECHNICAL EDUCATION</item>
+        <item>TRANS YAMUNA  AREA DEVELOPMENT BOARD</item>
+        <item>University College of Medical Sciences</item>
+        <item>URBAN DEVELOPMENT DEPARTMENT</item>
+        <item>URDU ACADEMY</item>
+        <item>VIGILANCE</item>
+        <item>WEIGHTS  AND MEASURES</item>
+        <item>WELFARE OF SC/ST/OBC</item>
+        <item>WOMEN AND CHILD DEVELOPMENT</item>
+        <item>Other</item>
+    </string-array>
+
+
+    <string name="title_activity_grievance">Grievance</string>
+    <string name="title_activity_helpline">Helpline</string>
+    <string name="title_activity_about_us">AboutUs</string>
+    <string name="title_activity_home">Home</string>
+    <string name="in_the_home_page">IN the Home Page</string>
+    <string name="search">Search</string>
+    <string name="signup">Sign Up</string>
 </resources>
