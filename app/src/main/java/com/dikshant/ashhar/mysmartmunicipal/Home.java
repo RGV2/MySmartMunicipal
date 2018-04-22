@@ -15,10 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    TextView textView_name, textView_mail;
+    String name,mail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,14 @@ public class Home extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View view=navigationView.getHeaderView(0);
+        textView_name = (TextView)view.findViewById(R.id.tv_name);
+        textView_mail = (TextView)view.findViewById(R.id.tv_mail);
+        SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
+        mail=sharedPreferences.getString("key1","");
+        name=sharedPreferences.getString("key2","");
+        textView_name.setText(name);
+        textView_mail.setText(mail);
     }
 
     @Override

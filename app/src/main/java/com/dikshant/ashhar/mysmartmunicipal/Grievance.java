@@ -66,6 +66,14 @@ public class Grievance extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View view=navigationView.getHeaderView(0);
+        TextView textView_name = (TextView)view.findViewById(R.id.tv_name);
+        TextView textView_mail = (TextView)view.findViewById(R.id.tv_mail);
+        SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
+        String mail=sharedPreferences.getString("key1","");
+        String name=sharedPreferences.getString("key2","");
+        textView_name.setText(name);
+        textView_mail.setText(mail);
 
 
         final Button locate = (Button) findViewById(R.id.btn_locate);
@@ -84,7 +92,6 @@ public class Grievance extends AppCompatActivity
                     latitude = location.getLatitude();
                     longitude = location.getLongitude();
                     textView.setText("Latitude: "+latitude+"\n"+"Longitude: "+longitude);
-                    Toast.makeText(getApplicationContext(),"GPS Latitude = "+latitude+"\n GPS Longitude = "+longitude,Toast.LENGTH_SHORT).show();
                 }
             }
         });

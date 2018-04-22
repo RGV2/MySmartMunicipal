@@ -49,6 +49,14 @@ public class Helpline extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        View view=navigationView.getHeaderView(0);
+        TextView textView_name = (TextView)view.findViewById(R.id.tv_name);
+        TextView textView_mail = (TextView)view.findViewById(R.id.tv_mail);
+        SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
+        String mail=sharedPreferences.getString("key1","");
+        String name=sharedPreferences.getString("key2","");
+        textView_name.setText(name);
+        textView_mail.setText(mail);
 
         final Button button = (Button) findViewById(R.id.btn_search);
         button.setOnClickListener(new View.OnClickListener() {
