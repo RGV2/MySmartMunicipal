@@ -65,6 +65,7 @@ public class Login extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             Connection con = null;
+            int count=0;
 
             try {
                 con = Starter.connection();
@@ -83,6 +84,12 @@ public class Login extends AppCompatActivity {
                         editor.putString("key", userId);
                         editor.putString("key1", rSet.getString("email"));
                         editor.putString("key2", rSet.getString("name"));
+                        editor.remove("totalGrievances");
+                        editor.apply();
+                        rSet = stmt.executeQuery("select * from grievances where user_name = '" + userId + "'");
+                        while (rSet.next())
+                            count++;
+                        editor.putString("totalGrievances", String.valueOf(count));
                         editor.apply();
                     }
                 }

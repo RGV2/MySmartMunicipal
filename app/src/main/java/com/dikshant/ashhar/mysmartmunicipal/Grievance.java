@@ -44,7 +44,6 @@ public class Grievance extends AppCompatActivity
     EditText editText;
     TextView textView;
     Location location;
-    String grievance,dept;
     Spinner spinner;
 
     @Override
@@ -187,6 +186,7 @@ public class Grievance extends AppCompatActivity
         Connection con = null;
         String qry,toastShow,pref;
         Boolean connect=false, inserted = false;
+        int count=0;
 
         @Override
         protected String doInBackground(String... strings) {
@@ -205,8 +205,16 @@ public class Grievance extends AppCompatActivity
                     stmt.setString(5, pref);
                     if (stmt.executeUpdate() > 0) {
                         inserted = true;
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.remove("totalGrievances");
+                        editor.apply();
+                        rSet = stmt.executeQuery("select * from grievances where user_name = '" + pref + "'");
+                        while (rSet.next())
+                           count++;
+                        editor.putString("totalGrievances", String.valueOf(count));
+                        editor.apply();
                     } else
-                        toastShow = "Signup Unsuccessful";
+                        toastShow = "Unable to Submit";
                 }
             } catch (SQLException se) {
                 Log.e("ERRO", se.getMessage());
@@ -221,6 +229,7 @@ public class Grievance extends AppCompatActivity
             try {
                 if (inserted){
                     Toast.makeText(getApplicationContext(), "Successfully submitted", Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(Grievance.this,Home.class);
                     startActivity(intent);
                 }

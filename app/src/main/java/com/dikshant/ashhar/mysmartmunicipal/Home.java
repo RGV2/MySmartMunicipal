@@ -1,11 +1,13 @@
 package com.dikshant.ashhar.mysmartmunicipal;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,7 +23,7 @@ import android.widget.Toast;
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TextView textView_name, textView_mail;
+    TextView textView_name, textView_mail, textView_profile;
     String name,mail;
 
     @Override
@@ -47,6 +49,20 @@ public class Home extends AppCompatActivity
         name=sharedPreferences.getString("key2","");
         textView_name.setText(name);
         textView_mail.setText(mail);
+
+        final TextView textView_myG = (TextView) findViewById(R.id.tv_myG);
+        textView_myG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new Intent(Home.this,AllGrievances.class);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Log.e("ERROR", e.getMessage());
+                }
+            }
+        });
+
     }
 
     @Override

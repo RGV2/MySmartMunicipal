@@ -1,8 +1,9 @@
 package com.dikshant.ashhar.mysmartmunicipal;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,10 +27,12 @@ public class Starter extends AppCompatActivity {
     public class Checker extends AsyncTask<String, String, String>{
         Boolean check = false;
         String pref;
+        int count=0;
 
         @Override
         protected String doInBackground(String... strings) {
             SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
+            Editor editor = sharedPreferences.edit();
             pref=sharedPreferences.getString("key","");
             String qry = "SELECT * FROM user where userid = '"+pref+"'";
             Statement stmt = null;
@@ -38,8 +41,17 @@ public class Starter extends AppCompatActivity {
 
                 stmt = con.createStatement();
                 ResultSet rSet = stmt.executeQuery(qry);
-                if (rSet.next())
+                if (rSet.next()) {
+                    editor.remove("totalGrievances");
+                    editor.apply();
+                    editor = sharedPreferences.edit();
                     check = true;
+                    rSet = stmt.executeQuery("select * from grievances where user_name = '" + pref + "'");
+                    while (rSet.next())
+                        count++;
+                    editor.putString("totalGrievances", String.valueOf(count));
+                    editor.apply();
+                }
                 else
                     check = false;
                 con.close();
