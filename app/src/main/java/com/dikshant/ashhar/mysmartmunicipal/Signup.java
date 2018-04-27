@@ -142,7 +142,7 @@ public class Signup extends AppCompatActivity {
 
             try {
                 con = connection();
-
+                if (con!=null){
                 if (valid){
                     qry = "INSERT INTO user (userid,email,password,name,contact,aadhar) VALUES(?,?,?,?,?,?)";
                     PreparedStatement stmt = con.prepareStatement(qry);
@@ -157,6 +157,8 @@ public class Signup extends AppCompatActivity {
                     } else
                         toastShow = "Signup Unsuccessful";
                     con.close();
+                    stmt.close();
+                }
                 }
             } catch (SQLException se) {
                 Log.e("ERROR", se.getMessage());

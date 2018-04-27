@@ -63,6 +63,19 @@ public class Home extends AppCompatActivity
             }
         });
 
+        final TextView textView_myP = (TextView) findViewById(R.id.tv_profile);
+        textView_myP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent intent = new Intent(Home.this,Profile.class);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Log.e("ERROR", e.getMessage());
+                }
+            }
+        });
+
     }
 
     @Override
@@ -122,6 +135,14 @@ public class Home extends AppCompatActivity
         } else if (id == R.id.nav_helpline) {
             Toast.makeText(getApplicationContext(), "Helpline", Toast.LENGTH_SHORT).show();
             Intent intentMain = new Intent(Home.this, Helpline.class);
+            startActivity(intentMain);
+        } else if (id == R.id.nav_extra) {
+            Toast.makeText(getApplicationContext(), "Extras", Toast.LENGTH_SHORT).show();
+            Intent intentMain = new Intent(Home.this, Extras.class);
+            startActivity(intentMain);
+        } else if (id == R.id.nav_contact) {
+            Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_SHORT).show();
+            Intent intentMain = new Intent(Home.this, Contact.class);
             startActivity(intentMain);
         }
 

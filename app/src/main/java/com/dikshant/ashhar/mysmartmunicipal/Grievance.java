@@ -174,6 +174,14 @@ public class Grievance extends AppCompatActivity
             Toast.makeText(getApplicationContext(), "Helpline", Toast.LENGTH_SHORT).show();
             Intent intentMain = new Intent(Grievance.this, Helpline.class);
             startActivity(intentMain);
+        } else if (id == R.id.nav_extra) {
+            Toast.makeText(getApplicationContext(), "Extras", Toast.LENGTH_SHORT).show();
+            Intent intentMain = new Intent(Grievance.this, Extras.class);
+            startActivity(intentMain);
+        } else if (id == R.id.nav_contact) {
+            Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_SHORT).show();
+            Intent intentMain = new Intent(Grievance.this, Contact.class);
+            startActivity(intentMain);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -215,6 +223,7 @@ public class Grievance extends AppCompatActivity
                         editor.apply();
                     } else
                         toastShow = "Unable to Submit";
+                stmt.close();
                 }
             } catch (SQLException se) {
                 Log.e("ERRO", se.getMessage());
@@ -238,6 +247,7 @@ public class Grievance extends AppCompatActivity
                 if (!connect)
                     Toast.makeText(getApplicationContext(), "Unable to Connect", Toast.LENGTH_SHORT).show();
                 con.close();
+                rSet.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

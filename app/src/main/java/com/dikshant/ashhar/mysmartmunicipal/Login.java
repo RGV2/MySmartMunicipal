@@ -93,6 +93,7 @@ public class Login extends AppCompatActivity {
                         editor.apply();
                     }
                     rSet.close();
+                    stmt.close();
                 }
                 con.close();
 

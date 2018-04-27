@@ -26,7 +26,7 @@ public class Validation extends AsyncTask<String, String, Boolean> {
 
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
-            ResultSet rSet;
+            ResultSet rSet=null;
             Connection con=Signup.connection();
             Statement stmt = con.createStatement();
             if(type.equals("user")){
@@ -45,6 +45,8 @@ public class Validation extends AsyncTask<String, String, Boolean> {
                     invalid = true;
             }
             con.close();
+            stmt.close();
+            rSet.close();
         }catch (SQLException se) {
             Log.e("ERROR  in Validation", se.getMessage());
         }catch (Exception e) {

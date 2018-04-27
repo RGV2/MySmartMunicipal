@@ -4,4 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="black">#000000</color>
+    <color name="Turquoise">#48d1cc</color>
+    <color name="LightSeaGreen">#20b2aa</color>
+
 </resources>

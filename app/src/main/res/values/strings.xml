@@ -20,6 +20,17 @@
     <string name="don_t_have_account"><u>Don\'t have account</u></string>
     <string name="back">Back</string>
     <string name="already_exist">Already exist</string>
+    <string name="tv1"><a href="http://mcdonline.gov.in/tri/sdmc_mcdportal/dwdforms/birth.pdf">Birth Registration Form</a></string>
+    <string name="tv2"><a href="http://delhi.gov.in/wps/wcm/connect/66af22004e01eacd841ea4d4f77cccee/Time+Table+of+DTC+Bus+Routes+%28City++Service%29.xlsx?MOD=AJPERES&amp;lmod=-322799927">Time Table of DTC Bus Routes</a></string>
+    <string name="tv3"><a href="http://delhi.gov.in/wps/wcm/connect/1b3d2080425bcef1a98fede65720bfa0/Time+Table+of+NCR+Bus+Routes.xlsx?MOD=AJPERES&amp;lmod=-322799927">Time Table of DTC NCR Bus Routes</a></string>
+    <string name="tv4"><a href="http://delhi.gov.in/wps/wcm/connect/abbed1804df8eec685abddc4677a1568/Time+Table+of+Night+Bus++Services.xlsx?MOD=AJPERES&amp;lmod=-322799927">Time Table of Night Bus Service</a></string>
+    <string name="tv5"><a href="http://delhi.gov.in/wps/wcm/connect/DOIT_DTC/dtc/pdf/pass+application+form">DTC Bus Pass Form</a></string>
+    <string name="tv6"><a href="http://www.delhimetrorail.com/otherdocuments/922/Route_Map_Folder_Eng_CTC.pdf">Delhi Metro Map</a></string>
+    <string name="tv7"><a href="https://edistrict.delhigovt.nic.in/Downloads/ApplicationForm/Input_9050.pdf">Issuance of OBC Cast Certificate</a></string>
+    <string name="tv8"><a href="https://edistrict.delhigovt.nic.in/Downloads/ApplicationForm/Input_9054.pdf">Issuance of Domicile Certificate</a></string>
+    <string name="tv9"><a href="https://edistrict.delhigovt.nic.in/Downloads/ApplicationForm/Input_9055.pdf">Issuance of Income Certificate</a></string>
+    <string name="tv10"><a href="https://edistrict.delhigovt.nic.in/Downloads/ApplicationForm/Input_9073.pdf">Registration of Marriage</a></string>
+
 
     <string-array name="departments">
         <item>Select Department</item>
@@ -326,4 +337,10 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="logout">Logout</string>
+    <string name="title_activity_extras">Extras</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="title_activity_contact">Contact</string>
 </resources>

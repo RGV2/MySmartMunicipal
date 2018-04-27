@@ -106,6 +106,14 @@ public class AboutUs extends AppCompatActivity
             Toast.makeText(getApplicationContext(), "Helpline", Toast.LENGTH_SHORT).show();
             Intent intentMain = new Intent(AboutUs.this, Helpline.class);
             startActivity(intentMain);
+        } else if (id == R.id.nav_extra) {
+            Toast.makeText(getApplicationContext(), "Extras", Toast.LENGTH_SHORT).show();
+            Intent intentMain = new Intent(AboutUs.this, Extras.class);
+            startActivity(intentMain);
+        } else if (id == R.id.nav_contact) {
+            Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_SHORT).show();
+            Intent intentMain = new Intent(AboutUs.this, Contact.class);
+            startActivity(intentMain);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

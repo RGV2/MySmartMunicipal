@@ -100,6 +100,14 @@ public class AllGrievances extends AppCompatActivity {
                 }
                 radioGroup.addView(rb[i]);
             }
+
+            try {
+                con.close();
+                stmt.close();
+                rSet.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

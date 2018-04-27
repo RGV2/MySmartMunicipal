@@ -5,34 +5,29 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class MyGrievance extends AppCompatActivity {
-    TextView textViewGID,textViewDESC,textViewDEPT,textViewLOC,textViewSTATUS;
+public class Profile extends AppCompatActivity {
+
+    TextView name,email,contact,aadhar,time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_grievance);
-        textViewGID = (TextView) findViewById(R.id.tv_gid);
-        textViewDESC = (TextView) findViewById(R.id.tv_Gview);
-        textViewDEPT = (TextView) findViewById(R.id.tv_Gdept);
-        textViewLOC = (TextView) findViewById(R.id.tv_Glocation);
-        textViewSTATUS = (TextView) findViewById(R.id.tv_Gtime);
+        setContentView(R.layout.activity_profile);
+        name=(TextView) findViewById(R.id.tv_profileName);
+        email=(TextView) findViewById(R.id.tv_profileEmail);
+        contact=(TextView) findViewById(R.id.tv_profileContact);
+        aadhar=(TextView) findViewById(R.id.tv_profileAadhar);
+        time=(TextView) findViewById(R.id.tv_profileTime);
 
         Fetch fetch = new Fetch();
         fetch.execute();
-
     }
     class Fetch extends AsyncTask<String, String, String> {
 
@@ -40,7 +35,6 @@ public class MyGrievance extends AppCompatActivity {
         String username;
         Statement stmt;
         ResultSet rSet=null;
-        int gid = getIntent().getIntExtra("gid",0);
 
         @Override
         protected void onPreExecute() {
@@ -54,7 +48,7 @@ public class MyGrievance extends AppCompatActivity {
             if (con != null) {
                 try {
                     stmt = con.createStatement();
-                    rSet = stmt.executeQuery("select * from grievances where user_name = '" + username + "' and gid = '" + gid + "'");
+                    rSet = stmt.executeQuery("select * from user where userid = '" + username + "'");
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -67,23 +61,18 @@ public class MyGrievance extends AppCompatActivity {
             try {
                 while (rSet.next()) {
                     rSet.absolute(1);
-                    textViewGID.setText("Grievance ID: G"+rSet.getString("gid"));
-                    textViewDESC.setText(rSet.getString("grievance"));
-                    textViewDEPT.setText("Deaprtment: "+rSet.getString("department"));
-                    textViewLOC.setText("Location:\nLatitude:"+rSet.getString("latitude")+"\nLongitude:"+rSet.getString("longitude"));
-                    textViewSTATUS.setText("Date & Time: "+rSet.getString("time_stamp"));
-                    }
+                    name.setText("Name:"+rSet.getString("name"));
+                    email.setText("E-mail: "+rSet.getString("email"));
+                    contact.setText("Contact No.: "+rSet.getString("contact"));
+                    aadhar.setText("AADHAR: "+rSet.getString("aadhar"));
+                    time.setText("User since: "+rSet.getString("create_time"));
+                    con.close();
+                    stmt.close();
+                    rSet.close();
+                }
             }catch (SQLException e) {
-                e.printStackTrace();
-            }
-            try {
-                con.close();
-                stmt.close();
-                rSet.close();
-            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
     }
 }
-

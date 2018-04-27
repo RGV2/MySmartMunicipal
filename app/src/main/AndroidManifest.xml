@@ -41,6 +41,15 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MyGrievance" />
         <activity android:name=".AllGrievances" />
+        <activity android:name=".Profile" />
+        <activity
+            android:name=".Extras"
+            android:label="@string/title_activity_extras"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Contact"
+            android:label="@string/title_activity_contact"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

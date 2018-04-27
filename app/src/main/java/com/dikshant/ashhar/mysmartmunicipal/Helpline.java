@@ -134,6 +134,14 @@ public class Helpline extends AppCompatActivity
             Toast.makeText(getApplicationContext(), "Helpline", Toast.LENGTH_SHORT).show();
             Intent intentMain = new Intent(Helpline.this, Helpline.class);
             startActivity(intentMain);
+        } else if (id == R.id.nav_extra) {
+            Toast.makeText(getApplicationContext(), "Extras", Toast.LENGTH_SHORT).show();
+            Intent intentMain = new Intent(Helpline.this, Extras.class);
+            startActivity(intentMain);
+        } else if (id == R.id.nav_contact) {
+            Toast.makeText(getApplicationContext(), "Contact Us", Toast.LENGTH_SHORT).show();
+            Intent intentMain = new Intent(Helpline.this, Contact.class);
+            startActivity(intentMain);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -169,6 +177,7 @@ public class Helpline extends AppCompatActivity
                         if (rSet.next()) {
                             found=true;
                         }
+                        stmt.close();
                     }
 //                    con.close();
                 }
@@ -202,6 +211,7 @@ public class Helpline extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "Unable to Connect", Toast.LENGTH_SHORT).show();
 
                 con.close();
+                rSet.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
