@@ -92,6 +92,7 @@ public class Login extends AppCompatActivity {
                         editor.putString("totalGrievances", String.valueOf(count));
                         editor.apply();
                     }
+                    rSet.close();
                 }
                 con.close();
 

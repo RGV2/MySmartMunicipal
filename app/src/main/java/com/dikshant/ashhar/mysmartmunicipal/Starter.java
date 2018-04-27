@@ -55,6 +55,7 @@ public class Starter extends AppCompatActivity {
                 else
                     check = false;
                 con.close();
+                rSet.close();
 
             } catch (SQLException e) {
                 e.printStackTrace();

@@ -30,7 +30,7 @@ public class AllGrievances extends AppCompatActivity {
 
         ll = (LinearLayout) findViewById(R.id.linearLayout);
 
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+//        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
 
 
         SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
@@ -59,7 +59,7 @@ public class AllGrievances extends AppCompatActivity {
         int counter=0;
         String username,totalGrievance;
         Statement stmt;
-        ResultSet rSet;
+        ResultSet rSet=null;
 
 
         @Override
@@ -91,33 +91,28 @@ public class AllGrievances extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             Toast.makeText(getApplicationContext(), totalGrievance, Toast.LENGTH_SHORT).show();
-//            for (int i = 1; i<=counter; i++) {
-//                try {
-//                    while (rSet.next()) {
-//                        radioButton = new RadioButton(getBaseContext());
-//                        radioButton.setId(i);
-//                        radioButton.setText(rSet.getString("gid")+":"+rSet.getString("department"));
-//                        System.out.println("-------------------------------------------------------"+radioButton.getText());
-////                        int value = Integer.parseInt(string.replaceAll("[^0-9]", ""));
-//                        radioGroup.addView(radioButton);
-//
-//                    }
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//
-//                }
-//            }
-//            radioGroup.addView(radioButton);
-//            ll.removeView(findViewById(R.id.radioGroup));
-            final RadioButton[] rb = new RadioButton[5];
-//            RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
-            for(int i=0; i<5; i++){
+            final RadioButton[] rb = new RadioButton[counter];
+            for(int i=0; i<counter; i++){
+                radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
                 rb[i]  = new RadioButton(getApplicationContext());
-                rb[i].setText("btn"+i);
-                rb[i].setId(i + 100);
+                try {
+//                    rSet.absolute(i);
+                    while(rSet.first()){
+                        rb[i].setText("G:"+rSet.getString("gid")+":"+rSet.getString("department"));
+                        rb[i].setId(i + 100);
+//                        rSet.getDouble("openingBalance");
+//                        rSet.next();
+                    }
+//                    while (rSet.next()){
+//                        rSet.absolute(i+1);
+////                        System.out.println("---------------------------------------------------------------------------------"+rSet.absolute(i+1));
+
+//                    }
+                }catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 radioGroup.addView(rb[i]);
             }
-//            ll.addView(radioGroup);//you add the whole RadioGroup to the layout
         }
     }
 }
