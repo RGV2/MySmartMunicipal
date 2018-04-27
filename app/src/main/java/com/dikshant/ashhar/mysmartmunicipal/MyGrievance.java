@@ -1,9 +1,13 @@
 package com.dikshant.ashhar.mysmartmunicipal;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,59 +29,54 @@ public class MyGrievance extends AppCompatActivity {
         textViewDEPT = (TextView) findViewById(R.id.tv_Gdept);
         textViewLOC = (TextView) findViewById(R.id.tv_Glocation);
         textViewSTATUS = (TextView) findViewById(R.id.tv_Gtime);
+
+        Fetch fetch = new Fetch();
+        fetch.execute();
+
     }
-//    class Fetcher extends AsyncTask<String, String, String> {
-//        ResultSet rSet;
-//        Connection con = null;
-//        String qry;
-//        Boolean found=false, empty=false, connect=false;
-//
-//        @Override
-//        protected String doInBackground(String... strings) {
-//            try {
-//                con = Starter.connection();
-//                if (con!=null) {
-//                    connect=true;
-//                    qry = "SELECT * FROM grievances WHERE gid = '" + dept + "'";
-//                    Statement stmt = con.createStatement();
-//                    rSet = stmt.executeQuery(qry);
-//
-//                        if (rSet.next()) {
-//                            found=true;
-//                        }
-//
-//                }
-//            } catch (SQLException se) {
-//                Log.e("ERRO", se.getMessage());
-//            } catch (Exception e) {
-//                Log.e("ERRO", e.getMessage());
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            String data="",full="";
-//            try {
-//                if (empty)
-//                    Toast.makeText(getApplicationContext(), "Please Select Department", Toast.LENGTH_SHORT).show();
-//                if (found){
-//                    ResultSetMetaData rsmd = rSet.getMetaData();
-//                    while (rSet.next()){
-//                        for (int i = 1 ; i<=rsmd.getColumnCount(); i++)
-//                            data = rSet.getString(2);
-//                        full=full + data+"\n\n";
-//                    }
-//                    textView.setText(full);
-//                }
-//
-//                if (!connect)
-//                    Toast.makeText(getApplicationContext(), "Unable to Connect", Toast.LENGTH_SHORT).show();
-//
-//                con.close();
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+    class Fetch extends AsyncTask<String, String, String> {
+
+        Connection con = null;
+        String username;
+        Statement stmt;
+        ResultSet rSet=null;
+        int gid = getIntent().getIntExtra("gid",0);
+
+        @Override
+        protected void onPreExecute() {
+            SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
+            username = sharedPreferences.getString("key", "");
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            con = Starter.connection();
+            if (con != null) {
+                try {
+                    stmt = con.createStatement();
+                    rSet = stmt.executeQuery("select * from grievances where user_name = '" + username + "' and gid = '" + gid + "'");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            try {
+                while (rSet.next()) {
+                    rSet.absolute(1);
+                    textViewGID.setText("Grievance ID: G"+rSet.getString("gid"));
+                    textViewDESC.setText(rSet.getString("grievance"));
+                    textViewDEPT.setText("Deaprtment: "+rSet.getString("department"));
+                    textViewLOC.setText("Location:\nLatitude:"+rSet.getString("latitude")+"\nLongitude:"+rSet.getString("longitude"));
+                    textViewSTATUS.setText("Date & Time: "+rSet.getString("time_stamp"));
+                    }
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
+

@@ -1,11 +1,11 @@
 package com.dikshant.ashhar.mysmartmunicipal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -29,14 +29,8 @@ public class AllGrievances extends AppCompatActivity {
         setContentView(R.layout.activity_all_grievances);
 
         ll = (LinearLayout) findViewById(R.id.linearLayout);
-
-//        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
-
-
         SharedPreferences sharedPreferences = getSharedPreferences("loginSession", Context.MODE_PRIVATE);
         String totalGrievances = sharedPreferences.getString("totalGrievances", "");
-        System.out.println("-------------------------------------------------------------------------"+totalGrievances);
-
         Fetch fetch = new Fetch();
         fetch.execute();
 
@@ -47,20 +41,24 @@ public class AllGrievances extends AppCompatActivity {
                 int selectedId = radioGroup.getCheckedRadioButtonId();
                 radioButton = (RadioButton) findViewById(selectedId);
                 Toast.makeText(getApplicationContext(),radioButton.getText(), Toast.LENGTH_SHORT).show();
+                String s= radioButton.getText().toString();
+                int value = Integer.parseInt(s.replaceAll("[^0-9]", ""));
+                Intent intent = new Intent(AllGrievances.this, MyGrievance.class);
+                intent.putExtra("gid",value);
+                startActivity(intent);
+
             }
         });
-
     }
 
     class Fetch extends AsyncTask<String, String, String> {
 
         Connection con = null;
-        Boolean found = false, empty = false, connect = false, proceed = false;
+        Boolean found = false;
         int counter=0;
         String username,totalGrievance;
         Statement stmt;
         ResultSet rSet=null;
-
 
         @Override
         protected void onPreExecute() {
@@ -68,7 +66,6 @@ public class AllGrievances extends AppCompatActivity {
             username = sharedPreferences.getString("key", "");
             totalGrievance=sharedPreferences.getString("totalGrievances","");
             counter= Integer.parseInt(totalGrievance);
-
         }
 
         @Override
@@ -83,7 +80,6 @@ public class AllGrievances extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-
             return null;
         }
 
@@ -96,18 +92,9 @@ public class AllGrievances extends AppCompatActivity {
                 radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
                 rb[i]  = new RadioButton(getApplicationContext());
                 try {
-//                    rSet.absolute(i);
-                    while(rSet.first()){
-                        rb[i].setText("G:"+rSet.getString("gid")+":"+rSet.getString("department"));
-                        rb[i].setId(i + 100);
-//                        rSet.getDouble("openingBalance");
-//                        rSet.next();
-                    }
-//                    while (rSet.next()){
-//                        rSet.absolute(i+1);
-////                        System.out.println("---------------------------------------------------------------------------------"+rSet.absolute(i+1));
-
-//                    }
+                    rSet.absolute(i+1);
+                    rb[i].setText("G:"+rSet.getString("gid")+":"+rSet.getString("department"));
+                    rb[i].setId(i + 100);
                 }catch (SQLException e) {
                     e.printStackTrace();
                 }

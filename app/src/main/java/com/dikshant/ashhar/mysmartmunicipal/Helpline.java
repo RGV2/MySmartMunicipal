@@ -188,6 +188,8 @@ public class Helpline extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "Please Select Department", Toast.LENGTH_SHORT).show();
             if (found){
                 ResultSetMetaData rsmd = rSet.getMetaData();
+                rSet.absolute(1);
+                full=rSet.getString(2)+"\n\n";
                 while (rSet.next()){
                     for (int i = 1 ; i<=rsmd.getColumnCount(); i++)
                         data = rSet.getString(2);
