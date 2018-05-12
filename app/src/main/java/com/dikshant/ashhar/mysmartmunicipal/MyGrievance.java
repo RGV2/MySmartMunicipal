@@ -1,6 +1,7 @@
 package com.dikshant.ashhar.mysmartmunicipal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,14 @@ public class MyGrievance extends AppCompatActivity {
         fetch.execute();
 
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(MyGrievance.this, AllGrievances.class);
+        startActivity(intent);
+    }
+
     class Fetch extends AsyncTask<String, String, String> {
 
         Connection con = null;

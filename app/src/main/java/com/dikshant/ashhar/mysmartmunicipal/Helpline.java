@@ -28,8 +28,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Helpline extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class Helpline extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     String dept;
     Spinner s1;
@@ -63,7 +62,6 @@ public class Helpline extends AppCompatActivity
 
             @Override
             public void onClick(View v) {
-
                 try {
                     s1 = (Spinner) findViewById(R.id.spin_department);
 
@@ -83,9 +81,11 @@ public class Helpline extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent intent = new Intent(Helpline.this,Home.class);
+            startActivity(intent);
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -156,14 +156,9 @@ public class Helpline extends AppCompatActivity
         Boolean found=false, empty=false, connect=false;
         TextView textView=(TextView) findViewById(R.id.tv_helpline);
 
-
-
         @Override
         protected String doInBackground(String... strings) {
-
-
             try {
-
                 con = Starter.connection();
                 if (con!=null) {
                     connect=true;
@@ -174,12 +169,9 @@ public class Helpline extends AppCompatActivity
                         Statement stmt = con.createStatement();
                         rSet = stmt.executeQuery(qry);
 
-                        if (rSet.next()) {
+                        if (rSet.next())
                             found=true;
-                        }
-                        stmt.close();
                     }
-//                    con.close();
                 }
             } catch (SQLException se) {
                 Log.e("ERRO", se.getMessage());
@@ -193,22 +185,23 @@ public class Helpline extends AppCompatActivity
         protected void onPostExecute(String s) {
             String data="",full="";
             try {
-            if (empty)
-                Toast.makeText(getApplicationContext(), "Please Select Department", Toast.LENGTH_SHORT).show();
-            if (found){
-                ResultSetMetaData rsmd = rSet.getMetaData();
-                rSet.absolute(1);
-                full=rSet.getString(2)+"\n\n";
-                while (rSet.next()){
-                    for (int i = 1 ; i<=rsmd.getColumnCount(); i++)
-                        data = rSet.getString(2);
-                    full=full + data+"\n\n";
-                }
-                textView.setText(full);
-            }
+                if (empty)
+                    Toast.makeText(getApplicationContext(), "Please Select Department", Toast.LENGTH_SHORT).show();
 
-            if (!connect)
-                Toast.makeText(getApplicationContext(), "Unable to Connect", Toast.LENGTH_SHORT).show();
+                if (found){
+                    ResultSetMetaData rsmd = rSet.getMetaData();
+                    rSet.absolute(1);
+                    full=rSet.getString(2)+"\n\n";
+                    while (rSet.next()){
+                        for (int i = 1 ; i<=rsmd.getColumnCount(); i++)
+                            data = rSet.getString(2);
+                        full=full + data+"\n\n";
+                    }
+                    textView.setText(full);
+                }
+
+                if (!connect)
+                    Toast.makeText(getApplicationContext(), "Unable to Connect", Toast.LENGTH_SHORT).show();
 
                 con.close();
                 rSet.close();

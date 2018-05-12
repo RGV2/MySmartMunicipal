@@ -22,7 +22,7 @@ import java.sql.Statement;
 
 public class Login extends AppCompatActivity {
     EditText uid, pwd;
-    String userId, pass, qry, qry1,qry2;
+    String userId, pass, qry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +56,13 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        Toast.makeText(getApplicationContext(),"Quitting", Toast.LENGTH_SHORT).show();
+        finishAffinity();
     }
 
     class EstablishCon extends AsyncTask<String, String, String> {
@@ -108,11 +115,15 @@ public class Login extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if (ifLogin) {
+                Toast.makeText(getApplicationContext(), "Welcome "+userId, Toast.LENGTH_SHORT).show();
                 Intent intentMain = new Intent(Login.this, Home.class);
                 intentMain.putExtra("userId", userId);
                 startActivity(intentMain);
-            }if (!ifLogin)
-                Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+            }if (!ifLogin) {
+                uid.setError("Invalid");
+                pwd.setError("Invalid");
+                Toast.makeText(getApplicationContext(), "Either User ID or Password is incorrect", Toast.LENGTH_SHORT).show();
+            }
             if (empty)
                 Toast.makeText(getApplicationContext(), "Please enter User ID and Password", Toast.LENGTH_SHORT).show();
             }

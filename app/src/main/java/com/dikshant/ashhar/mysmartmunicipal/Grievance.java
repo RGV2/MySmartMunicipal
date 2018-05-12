@@ -123,7 +123,8 @@ public class Grievance extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent intent = new Intent(Grievance.this,Home.class);
+            startActivity(intent);
         }
     }
 

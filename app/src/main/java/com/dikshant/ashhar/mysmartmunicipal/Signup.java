@@ -105,8 +105,8 @@ public class Signup extends AppCompatActivity {
                         userET.setError("User ID already exist!");
                         valid = false;
                     }
-                    if((contact.length() != 10) || !(contact.startsWith("7") || contact.startsWith("8") || contact.startsWith("9"))){
-                        contactET.setError("Please Enter Valid Contact No.");
+                    if((contact.length() != 10) || !(contact.startsWith("6") || contact.startsWith("7") || contact.startsWith("8") || contact.startsWith("9"))){
+                        contactET.setError("Please Enter Valid Mobile No.");
                         valid = false;
                     }
                     if(aadhar.length() != 12) {

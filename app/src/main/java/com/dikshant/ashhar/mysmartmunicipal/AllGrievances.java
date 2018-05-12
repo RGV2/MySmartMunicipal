@@ -51,6 +51,13 @@ public class AllGrievances extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(AllGrievances.this, Home.class);
+        startActivity(intent);
+    }
+
     class Fetch extends AsyncTask<String, String, String> {
 
         Connection con = null;

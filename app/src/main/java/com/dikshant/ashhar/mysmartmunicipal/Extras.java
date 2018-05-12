@@ -58,9 +58,11 @@ public class Extras extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent intent = new Intent(Extras.this,Home.class);
+            startActivity(intent);
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

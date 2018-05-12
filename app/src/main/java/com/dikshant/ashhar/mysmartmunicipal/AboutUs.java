@@ -52,9 +52,11 @@ public class AboutUs extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent intent = new Intent(AboutUs.this,Home.class);
+            startActivity(intent);
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

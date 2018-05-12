@@ -14,16 +14,12 @@ import java.sql.Statement;
  */
 
 public class Validation extends AsyncTask<String, String, Boolean> {
-    //    Connection con = null;
-    String qry;
-    boolean invalid = false;
 
     @Override
     protected Boolean doInBackground(String... strings) {
         boolean invalid = false;
         String data= strings[0],type = strings[1];
         try {
-
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
             ResultSet rSet=null;

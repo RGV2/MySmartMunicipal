@@ -8,7 +8,6 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/icon_home"
             android:title="Home" />
-        <!--android:icon="@drawable/ic_menu_camera"-->
         <item
             android:id="@+id/nav_grievance"
             android:icon="@drawable/icon_grievance"
